@@ -81,8 +81,8 @@ export function App() {
   }, [modelPrice, watchedInstallments, watchedStartingAmount])
 
   return (
-    <div className="flex h-screen items-center justify-center overflow-x-auto">
-      <Card className="relative m-2 w-full min-w-[300px]">
+    <div className="flex h-screen min-w-[300px] items-center justify-center">
+      <Card className="relative m-2 w-full">
         <div className="xs:block absolute right-2 top-5 hidden">
           <img src={modelImg} alt={modelImg} className="max-h-40" />
         </div>
