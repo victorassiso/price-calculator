@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { models } from './assets/models'
 import {
   Card,
   CardContent,
@@ -26,62 +27,12 @@ import { Slider } from './components/ui/slider'
 const FormSchema = z.object({
   modelName: z.string({ required_error: 'Selecione um modelo' }),
   modelPrice: z.coerce.number(),
+  modelImg: z.string(),
   installments: z.coerce.number(),
   startingAmount: z.coerce.number(),
 })
 
 type FormType = z.infer<typeof FormSchema>
-
-const models = [
-  {
-    name: 'iPhone 6',
-    price: 1000,
-  },
-  {
-    name: 'iPhone 6 plus',
-    price: 1200,
-  },
-  {
-    name: 'iPhone 7',
-    price: 1400,
-  },
-  {
-    name: 'iPhone 8',
-    price: 1600,
-  },
-  {
-    name: 'iPhone SE',
-    price: 1800,
-  },
-  {
-    name: 'iPhone XR',
-    price: 2200,
-  },
-  {
-    name: 'iPhone 12 Pro',
-    price: 2600,
-  },
-  {
-    name: 'iPhone 12 Pro Max',
-    price: 2900,
-  },
-  {
-    name: 'iPhone 13',
-    price: 3200,
-  },
-  {
-    name: 'iPhone 14',
-    price: 3500,
-  },
-  {
-    name: 'iPhone 14 Pro',
-    price: 3800,
-  },
-  {
-    name: 'iPhone 14 Pro Max',
-    price: 4500,
-  },
-] as const
 
 export function App() {
   const [total, setTotal] = useState(0)
@@ -90,6 +41,7 @@ export function App() {
     defaultValues: {
       modelName: '',
       modelPrice: 0,
+      modelImg: '',
       installments: 1,
       startingAmount: 0,
     },
@@ -102,8 +54,10 @@ export function App() {
 
     if (model) {
       setValue('modelPrice', model?.price)
+      setValue('modelImg', model.img)
     } else {
       setValue('modelPrice', 0)
+      setValue('modelImg', '')
     }
   }, [watchedModelName, setValue])
 
@@ -118,10 +72,17 @@ export function App() {
 
     setTotal(result)
   }, [watchedForm])
-
+  console.log(watchedForm.modelImg)
   return (
     <div className="flex h-screen items-center justify-center">
-      <Card className="w-full max-w-screen-sm">
+      <Card className="relative m-2 w-full">
+        <div className="absolute right-2 top-5">
+          <img
+            src={watchedForm.modelImg}
+            alt={watchedForm.modelImg}
+            className="h-40"
+          />
+        </div>
         <CardHeader>
           <CardTitle>Calculadora de preços</CardTitle>
           <CardDescription>Simule a compra do seu jeito!</CardDescription>
@@ -159,7 +120,7 @@ export function App() {
                 <span>
                   {watchedForm.startingAmount.toLocaleString('pt-BR', {
                     style: 'currency',
-                    currency: 'BRL',
+                    currency: 'EUR',
                   })}
                 </span>
               </div>
@@ -183,7 +144,7 @@ export function App() {
                   Max:{' '}
                   {watchedForm.modelPrice.toLocaleString('pt-BR', {
                     style: 'currency',
-                    currency: 'BRL',
+                    currency: 'EUR',
                   })}
                 </span>
               </div>
@@ -221,7 +182,7 @@ export function App() {
             <span className="">Total: </span>
             {total.toLocaleString('pt-BR', {
               style: 'currency',
-              currency: 'BRL',
+              currency: 'EUR',
             })}
           </CardTitle>
         </CardFooter>
