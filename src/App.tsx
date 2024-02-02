@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { models } from './assets/models'
+import { modelArray, models } from './assets/models'
 import {
   Card,
   CardContent,
@@ -26,8 +26,6 @@ import { Slider } from './components/ui/slider'
 
 const FormSchema = z.object({
   modelName: z.string({ required_error: 'Selecione um modelo' }),
-  modelPrice: z.coerce.number(),
-  modelImg: z.string(),
   installments: z.coerce.number(),
   startingAmount: z.coerce.number(),
 })
@@ -36,52 +34,57 @@ type FormType = z.infer<typeof FormSchema>
 
 export function App() {
   const [total, setTotal] = useState(0)
+  const [modelPrice, setModelPrice] = useState(0)
+  const [modelImg, setModelImg] = useState('')
   const { watch, control, setValue } = useForm<FormType>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       modelName: '',
-      modelPrice: 0,
-      modelImg: '',
       installments: 1,
       startingAmount: 0,
     },
   })
   const watchedModelName = watch('modelName')
+  // const watchedModelPrice = watch('modelPrice')
+  const watchedInstallments = watch('installments')
+  const watchedStartingAmount = watch('startingAmount')
   const watchedForm = watch()
 
   useEffect(() => {
-    const model = models.find((item) => item.name === watchedModelName)
+    // const model = modelArray.find((item) => item.name === watchedModelName)
+    const model = models[watchedModelName]
 
     if (model) {
-      setValue('modelPrice', model?.price)
-      setValue('modelImg', model.img)
+      // setValue('modelPrice', model?.price)
+      // setValue('modelImg', model.img)
+      setModelPrice(model.price)
+      setModelImg(model.img)
     } else {
-      setValue('modelPrice', 0)
-      setValue('modelImg', '')
+      // setValue('modelPrice', 0)
+      // setValue('modelImg', '')
+      setModelPrice(0)
+      setModelImg('')
     }
   }, [watchedModelName, setValue])
 
   useEffect(() => {
-    const price = parseFloat(String(watchedForm.modelPrice))
-    const startingAmount = parseFloat(String(watchedForm.startingAmount))
-    const installments = parseFloat(String(watchedForm.installments))
+    // const price = parseFloat(String(watchedModelPrice))
+    const price = modelPrice
+    const startingAmount = parseFloat(String(watchedStartingAmount))
+    const installments = parseFloat(String(watchedInstallments))
 
     const _total = (price - startingAmount) * Math.pow(1.047, installments)
 
     const result = _total + startingAmount
 
     setTotal(result)
-  }, [watchedForm])
-  console.log(watchedForm.modelImg)
+  }, [modelPrice, watchedInstallments, watchedStartingAmount])
+
   return (
     <div className="flex h-screen items-center justify-center">
       <Card className="relative m-2 w-full">
-        <div className="absolute right-2 top-5">
-          <img
-            src={watchedForm.modelImg}
-            alt={watchedForm.modelImg}
-            className="h-40"
-          />
+        <div className="xs:block absolute right-2 top-5 hidden">
+          <img src={modelImg} alt={modelImg} className="max-h-40" />
         </div>
         <CardHeader>
           <CardTitle>Calculadora de preços</CardTitle>
@@ -103,7 +106,7 @@ export function App() {
                       <SelectValue placeholder="Selecione um modelo" />
                     </SelectTrigger>
                     <SelectContent className="h-[250px]">
-                      {models.map((item, i) => (
+                      {modelArray.map((item, i) => (
                         <SelectItem key={i} value={item.name}>
                           <span>{item.name}</span>
                         </SelectItem>
@@ -112,6 +115,9 @@ export function App() {
                   </Select>
                 )}
               />
+              <div className="xs:hidden">
+                <img src={modelImg} alt={modelImg} className="max-h-40" />
+              </div>
             </div>
 
             <div className="flex flex-col gap-2">
@@ -132,7 +138,7 @@ export function App() {
                     onValueChange={field.onChange}
                     defaultValue={[field.value]}
                     id="startingAmount"
-                    max={watchedForm.modelPrice}
+                    max={modelPrice}
                     step={100}
                   />
                 )}
@@ -142,7 +148,7 @@ export function App() {
                 <span>Min: R$ 0,00</span>
                 <span>
                   Max:{' '}
-                  {watchedForm.modelPrice.toLocaleString('pt-BR', {
+                  {total.toLocaleString('pt-BR', {
                     style: 'currency',
                     currency: 'EUR',
                   })}

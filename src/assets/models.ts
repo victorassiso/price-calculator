@@ -7,7 +7,7 @@ import iPhone15Pro from './iPhone15Pro.png'
 import iPhone15ProMax from './iPhone15ProMax.png'
 import iPhoneSE from './iPhoneSE.png'
 
-export const models = [
+export const modelArray = [
   {
     name: 'iPhone SE',
     price: 429,
@@ -49,3 +49,11 @@ export const models = [
     img: iPhone15ProMax,
   },
 ] as const
+
+export const models = modelArray.reduce(
+  (acc, model) => {
+    acc[model.name] = model
+    return acc
+  },
+  {} as Record<string, (typeof modelArray)[number]>,
+)
