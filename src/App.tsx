@@ -6,10 +6,10 @@ import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { modelArray, models } from './assets/models'
+import { Button } from './components/ui/button'
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -81,14 +81,15 @@ export function App() {
   }, [modelPrice, watchedInstallments, watchedStartingAmount])
 
   return (
-    <div className="flex h-screen min-w-[300px] items-center justify-center">
-      <Card className="relative m-2 w-full">
+    <div className="flex h-screen min-w-[350px]  items-center justify-center">
+      <Card className="relative m-2 w-full max-w-[700px]">
         <div className="absolute right-2 top-5 hidden xs:block">
           <img src={modelImg} alt={modelImg} className="max-h-40" />
         </div>
         <CardHeader>
-          <CardTitle>Calculadora de preços</CardTitle>
-          <CardDescription>Simule a compra do seu jeito!</CardDescription>
+          <CardTitle className="w-80">
+            Simule facilmente o valor das parcelas do seu próximo produto Apple!
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <form className="flex flex-col gap-4">
@@ -138,7 +139,7 @@ export function App() {
                     onValueChange={field.onChange}
                     defaultValue={[field.value]}
                     id="startingAmount"
-                    max={modelPrice}
+                    max={600}
                     step={100}
                   />
                 )}
@@ -147,11 +148,12 @@ export function App() {
               <div className="flex items-center justify-between text-sm text-muted-foreground">
                 <span>Min: R$ 0,00</span>
                 <span>
-                  Max:{' '}
-                  {total.toLocaleString('pt-BR', {
+                  {/* Max:{' '}
+                  {modelPrice.toLocaleString('pt-BR', {
                     style: 'currency',
                     currency: 'EUR',
-                  })}
+                  })} */}
+                  Max: R$ 600,00
                 </span>
               </div>
             </div>
@@ -183,14 +185,20 @@ export function App() {
             </div>
           </form>
         </CardContent>
-        <CardFooter className="flex justify-end">
+        <CardFooter className="flex justify-between">
           <CardTitle>
-            <span className="">Total: </span>
-            {total.toLocaleString('pt-BR', {
-              style: 'currency',
-              currency: 'EUR',
-            })}
+            <span>Total: </span>
+            <span className="text-xl">12x </span>
+            <span className="text-3xl">
+              {total.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'EUR',
+              })}
+            </span>
           </CardTitle>
+          <Button variant="default" className="text-lg" size="lg">
+            Comprar
+          </Button>
         </CardFooter>
       </Card>
     </div>
