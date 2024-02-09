@@ -85,6 +85,9 @@
   }
   body {
     @apply bg-background text-foreground;
+    margin: 0;
+    padding: 0;
+    height: 100%
   }
   input {
     &:-webkit-autofill,

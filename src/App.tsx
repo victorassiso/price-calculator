@@ -80,20 +80,40 @@ export function App() {
     setTotal(result)
   }, [modelPrice, watchedInstallments, watchedStartingAmount])
 
+  function handleSubmit() {
+    console.log('Submit')
+    const phoneNumber = '+5521995327044'
+    const message = `Olá, gostaria de adqurir um ${watchedModelName} dando ${watchedStartingAmount.toLocaleString(
+      'pt-BR',
+      {
+        style: 'currency',
+        currency: 'EUR',
+      },
+    )} de entrada e parcelando em ${watchedInstallments} vezes.`
+
+    const encodedMessage = encodeURIComponent(message)
+
+    const whatsappLink =
+      'https://wa.me/' + phoneNumber + '/?text=' + encodedMessage
+
+    window.open(whatsappLink, '_blank')
+  }
+
   return (
     <div className="flex h-screen min-w-[350px]  items-center justify-center">
-      <Card className="relative m-2 w-full max-w-[700px]">
-        <div className="absolute right-2 top-5 hidden xs:block">
-          <img src={modelImg} alt={modelImg} className="max-h-40" />
-        </div>
-        <CardHeader>
-          <CardTitle className="w-80">
-            Simule facilmente o valor das parcelas do seu próximo produto Apple!
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <form className="flex flex-col gap-4">
-            <div className="flex w-[250px] flex-col gap-2">
+      <Card className="relative m-4 w-full max-w-[700px]">
+        <form onSubmit={handleSubmit}>
+          <div className="absolute right-2 top-5 hidden xs:block">
+            <img src={modelImg} alt={modelImg} className="max-h-40" />
+          </div>
+          <CardHeader>
+            <CardTitle className="text-center xs:w-80 xs:text-start">
+              Simule facilmente o valor das parcelas do seu próximo produto
+              Apple!
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2 xs:w-[250px]">
               <Label htmlFor="modelName">Modelo:</Label>
               <Controller
                 control={control}
@@ -116,7 +136,7 @@ export function App() {
                   </Select>
                 )}
               />
-              <div className="xs:hidden">
+              <div className="flex justify-center xs:hidden">
                 <img src={modelImg} alt={modelImg} className="max-h-40" />
               </div>
             </div>
@@ -183,23 +203,30 @@ export function App() {
                 <span>Max: 24</span>
               </div>
             </div>
-          </form>
-        </CardContent>
-        <CardFooter className="flex justify-between">
-          <CardTitle>
-            <span>Total: </span>
-            <span className="text-xl">12x </span>
-            <span className="text-3xl">
-              {total.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'EUR',
-              })}
-            </span>
-          </CardTitle>
-          <Button variant="default" className="text-lg" size="lg">
-            Comprar
-          </Button>
-        </CardFooter>
+          </CardContent>
+          <CardFooter className="flex justify-between">
+            <CardTitle>
+              <span className="text-muted-foreground">Total: </span>
+              <span className="text-xl text-muted-foreground">
+                {watchedInstallments}x de{' '}
+              </span>
+              <span className="mr-2 text-3xl">
+                {total.toLocaleString('pt-BR', {
+                  style: 'currency',
+                  currency: 'EUR',
+                })}
+              </span>
+            </CardTitle>
+            <Button
+              variant="default"
+              className="text-lg"
+              size="lg"
+              type="submit"
+            >
+              Comprar
+            </Button>
+          </CardFooter>
+        </form>
       </Card>
     </div>
   )
