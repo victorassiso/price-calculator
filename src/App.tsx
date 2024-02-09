@@ -48,7 +48,6 @@ export function App() {
   const watchedInstallments = watch('installments')
   const watchedStartingAmount = watch('startingAmount')
   const watchedForm = watch()
-  console.log({ watchedForm })
 
   useEffect(() => {
     const model = models[watchedModelName]
@@ -75,7 +74,6 @@ export function App() {
   }, [modelPrice, watchedInstallments, watchedStartingAmount])
 
   function OpenWhatsAppLink() {
-    console.log('Submit')
     const phoneNumber = '+5521995327044'
     const message = `Olá, gostaria de adquirir um ${watchedModelName} dando ${watchedStartingAmount.toLocaleString(
       'pt-BR',
