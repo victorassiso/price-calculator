@@ -33,7 +33,7 @@ const FormSchema = z.object({
 type FormType = z.infer<typeof FormSchema>
 
 export function App() {
-  const [total, setTotal] = useState(0)
+  const [installmentsvalue, setInstallmentsValue] = useState(0)
   const [modelPrice, setModelPrice] = useState(0)
   const [modelImg, setModelImg] = useState('')
   const { watch, control, setValue, handleSubmit } = useForm<FormType>({
@@ -66,12 +66,15 @@ export function App() {
     const startingAmount = parseFloat(String(watchedStartingAmount))
     const installments = parseFloat(String(watchedInstallments))
 
-    const _total = (price - startingAmount) * Math.pow(1.047, installments)
+    const interest = (price - startingAmount) * Math.pow(1.047, installments)
 
-    const result = _total + startingAmount
+    const total = interest + startingAmount
 
-    setTotal(result)
-  }, [modelPrice, watchedInstallments, watchedStartingAmount])
+    const totalPerInstallment =
+      total === 0 || !watchedModelName ? 0 : total / installments
+
+    setInstallmentsValue(totalPerInstallment)
+  }, [modelPrice, watchedInstallments, watchedModelName, watchedStartingAmount])
 
   function OpenWhatsAppLink() {
     const phoneNumber = '+5521995327044'
@@ -90,7 +93,7 @@ export function App() {
 
     window.open(whatsappLink, '_blank')
   }
-
+  console.log('REnder')
   return (
     <div className="flex h-screen min-w-[340px]  items-center justify-center">
       <Card className="relative w-full max-w-[700px]">
@@ -203,7 +206,7 @@ export function App() {
                 {watchedInstallments}x de{' '}
               </span>
               <span className="mr-2 text-3xl">
-                {total.toLocaleString('pt-BR', {
+                {installmentsvalue.toLocaleString('pt-BR', {
                   style: 'currency',
                   currency: 'EUR',
                 })}
