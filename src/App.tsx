@@ -94,8 +94,8 @@ export function App() {
   }
 
   return (
-    <div className="flex h-screen min-w-[350px]  items-center justify-center">
-      <Card className="relative m-4 w-full max-w-[700px]">
+    <div className="flex h-screen min-w-[340px]  items-center justify-center">
+      <Card className="relative w-full max-w-[700px]">
         <form onSubmit={handleSubmit(OpenWhatsAppLink)}>
           <div className="absolute right-2 top-5 hidden xs:block">
             <img src={modelImg} alt={modelImg} className="max-h-40" />
