@@ -83,7 +83,7 @@ export function App() {
   function handleSubmit() {
     console.log('Submit')
     const phoneNumber = '+5521995327044'
-    const message = `Olá, gostaria de adqurir um ${watchedModelName} dando ${watchedStartingAmount.toLocaleString(
+    const message = `Olá, gostaria de adquirir um ${watchedModelName} dando ${watchedStartingAmount.toLocaleString(
       'pt-BR',
       {
         style: 'currency',
