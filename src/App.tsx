@@ -140,7 +140,7 @@ export function App() {
               <div className="flex items-center gap-2">
                 <Label htmlFor="entryAmount">Valor de entrada:</Label>
                 <span>
-                  {watchedForm.startingAmount.toLocaleString('pt-BR', {
+                  {watchedForm.startingAmount.toLocaleString('pt', {
                     style: 'currency',
                     currency: 'EUR',
                   })}
@@ -161,14 +161,14 @@ export function App() {
               />
 
               <div className="flex items-center justify-between text-sm text-muted-foreground">
-                <span>Min: R$ 0,00</span>
+                <span>Min: € 0,00</span>
                 <span>
                   {/* Max:{' '}
                   {modelPrice.toLocaleString('pt-BR', {
                     style: 'currency',
                     currency: 'EUR',
                   })} */}
-                  Max: R$ 600,00
+                  Max: € 600,00
                 </span>
               </div>
             </div>
