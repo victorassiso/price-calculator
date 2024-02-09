@@ -25,7 +25,7 @@ import {
 import { Slider } from './components/ui/slider'
 
 const FormSchema = z.object({
-  modelName: z.string({ required_error: 'Selecione um modelo' }),
+  modelName: z.string({ required_error: 'Selecione um modelo' }).min(2),
   installments: z.coerce.number(),
   startingAmount: z.coerce.number(),
 })
@@ -36,7 +36,7 @@ export function App() {
   const [total, setTotal] = useState(0)
   const [modelPrice, setModelPrice] = useState(0)
   const [modelImg, setModelImg] = useState('')
-  const { watch, control, setValue } = useForm<FormType>({
+  const { watch, control, setValue, handleSubmit } = useForm<FormType>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       modelName: '',
@@ -45,30 +45,24 @@ export function App() {
     },
   })
   const watchedModelName = watch('modelName')
-  // const watchedModelPrice = watch('modelPrice')
   const watchedInstallments = watch('installments')
   const watchedStartingAmount = watch('startingAmount')
   const watchedForm = watch()
+  console.log({ watchedForm })
 
   useEffect(() => {
-    // const model = modelArray.find((item) => item.name === watchedModelName)
     const model = models[watchedModelName]
 
     if (model) {
-      // setValue('modelPrice', model?.price)
-      // setValue('modelImg', model.img)
       setModelPrice(model.price)
       setModelImg(model.img)
     } else {
-      // setValue('modelPrice', 0)
-      // setValue('modelImg', '')
       setModelPrice(0)
       setModelImg('')
     }
   }, [watchedModelName, setValue])
 
   useEffect(() => {
-    // const price = parseFloat(String(watchedModelPrice))
     const price = modelPrice
     const startingAmount = parseFloat(String(watchedStartingAmount))
     const installments = parseFloat(String(watchedInstallments))
@@ -80,7 +74,7 @@ export function App() {
     setTotal(result)
   }, [modelPrice, watchedInstallments, watchedStartingAmount])
 
-  function handleSubmit() {
+  function OpenWhatsAppLink() {
     console.log('Submit')
     const phoneNumber = '+5521995327044'
     const message = `Olá, gostaria de adquirir um ${watchedModelName} dando ${watchedStartingAmount.toLocaleString(
@@ -102,7 +96,7 @@ export function App() {
   return (
     <div className="flex h-screen min-w-[350px]  items-center justify-center">
       <Card className="relative m-4 w-full max-w-[700px]">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(OpenWhatsAppLink)}>
           <div className="absolute right-2 top-5 hidden xs:block">
             <img src={modelImg} alt={modelImg} className="max-h-40" />
           </div>
@@ -123,7 +117,7 @@ export function App() {
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
-                    <SelectTrigger>
+                    <SelectTrigger ref={field.ref}>
                       <SelectValue placeholder="Selecione um modelo" />
                     </SelectTrigger>
                     <SelectContent className="h-[250px]">
