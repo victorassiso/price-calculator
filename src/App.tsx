@@ -10,6 +10,7 @@ import { Button } from './components/ui/button'
 import {
   Card,
   CardContent,
+  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -66,9 +67,11 @@ export function App() {
     const startingAmount = parseFloat(String(watchedStartingAmount))
     const installments = parseFloat(String(watchedInstallments))
 
-    const interest = (price - startingAmount) * Math.pow(1.047, installments)
+    // const interest = (price - startingAmount) * Math.pow(1.047, installments)
 
-    const total = interest + startingAmount
+    // const total = interest + startingAmount
+
+    const total = price - (startingAmount * 2) / installments
 
     const totalPerInstallment =
       total === 0 || !watchedModelName ? 0 : total / installments
@@ -93,7 +96,8 @@ export function App() {
 
     window.open(whatsappLink, '_blank')
   }
-  console.log('REnder')
+  // console.log('Render')
+
   return (
     <div className="flex h-screen min-w-[340px]  items-center justify-center">
       <Card className="relative w-full max-w-[700px]">
@@ -101,11 +105,16 @@ export function App() {
           <div className="absolute right-2 top-5 hidden xs:block">
             <img src={modelImg} alt={modelImg} className="max-h-40" />
           </div>
-          <CardHeader>
+          <CardHeader className="flex flex-col gap-2">
             <CardTitle className="text-center xs:w-80 xs:text-start">
-              Simule facilmente o valor das parcelas do seu próximo produto
-              Apple!
+              {/* Simule facilmente o valor das parcelas do seu próximo produto
+              Apple! */}
+              Simulador de preços
             </CardTitle>
+            <CardDescription className="text-center xs:w-80 xs:text-start">
+              Escolha a que melhor se encaixa entre parcelas mensais (até 6x),
+              quinzenais (até 12x) ou semanais (até 24x).
+            </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col gap-4">
             <div className="flex flex-col gap-2 xs:w-[250px]">
@@ -163,12 +172,11 @@ export function App() {
               <div className="flex items-center justify-between text-sm text-muted-foreground">
                 <span>Min: € 0,00</span>
                 <span>
-                  {/* Max:{' '}
+                  Max:{' '}
                   {modelPrice.toLocaleString('pt-BR', {
                     style: 'currency',
                     currency: 'EUR',
-                  })} */}
-                  Max: € 600,00
+                  })}
                 </span>
               </div>
             </div>
