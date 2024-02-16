@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { productArray } from './assets/models'
+import { products } from './assets/products'
 import { Button } from './components/ui/button'
 import {
   Card,
@@ -27,9 +27,8 @@ import { useInstallments } from './hooks/useInstallments'
 import { useProduct } from './hooks/useProduct'
 import { useStartingAmount } from './hooks/useStartingAmount'
 import { whatsAppRedirect } from './utils/whastAppRedirect'
-
 const FormSchema = z.object({
-  modelName: z.string({ required_error: 'Selecione um modelo' }).min(2),
+  modelName: z.string({ required_error: 'Selecione um produto' }).min(2),
   installments: z.coerce.number(),
   startingAmount: z.coerce.number(),
 })
@@ -73,7 +72,7 @@ export function App() {
       startingAmount,
     })
   }
-
+  console.log({ products })
   return (
     <div className="flex h-screen min-w-[340px]  items-center justify-center">
       <Card className="relative mx-2 w-full max-w-[700px]">
@@ -94,7 +93,7 @@ export function App() {
           </CardHeader>
           <CardContent className="flex flex-col gap-4">
             <div className="flex flex-col gap-2 xs:w-[250px]">
-              <Label htmlFor="modelName">Modelo:</Label>
+              <Label htmlFor="modelName">Produto:</Label>
               <Controller
                 control={control}
                 name="modelName"
@@ -104,10 +103,10 @@ export function App() {
                     defaultValue={field.value}
                   >
                     <SelectTrigger ref={field.ref} className="border-primary">
-                      <SelectValue placeholder="Selecione um modelo" />
+                      <SelectValue placeholder="Selecione um produto" />
                     </SelectTrigger>
                     <SelectContent className="h-[250px]">
-                      {productArray.map((item, i) => (
+                      {products.map((item, i) => (
                         <SelectItem key={i} value={item.name}>
                           <span>{item.name}</span>
                         </SelectItem>

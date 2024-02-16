@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { Product, products } from '@/assets/models'
+import { Product, productMap } from '@/assets/products'
 
 export function useProduct(productName: string) {
   const [product, setProduct] = useState({
@@ -12,8 +12,10 @@ export function useProduct(productName: string) {
 
   // Update Product state
   useEffect(() => {
-    const product = products[productName]
-
+    console.log(productName)
+    console.log(productMap)
+    const product = productMap[productName]
+    console.log(product)
     if (product) {
       setProduct(product)
     } else {
@@ -25,6 +27,6 @@ export function useProduct(productName: string) {
       } as Product)
     }
   }, [productName])
-
+  console.log({ product })
   return { product }
 }

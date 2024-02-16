@@ -1,4 +1,4 @@
-import { Product } from '@/assets/models'
+import { Product } from '@/assets/products'
 
 interface useStartingAmountProps {
   product: Product
