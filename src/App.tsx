@@ -72,7 +72,7 @@ export function App() {
       startingAmount,
     })
   }
-  console.log({ products })
+
   return (
     <div className="flex h-screen min-w-[340px]  items-center justify-center">
       <Card className="relative mx-2 w-full max-w-[700px]">

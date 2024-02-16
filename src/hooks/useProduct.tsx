@@ -12,10 +12,7 @@ export function useProduct(productName: string) {
 
   // Update Product state
   useEffect(() => {
-    console.log(productName)
-    console.log(productMap)
     const product = productMap[productName]
-    console.log(product)
     if (product) {
       setProduct(product)
     } else {
@@ -27,6 +24,6 @@ export function useProduct(productName: string) {
       } as Product)
     }
   }, [productName])
-  console.log({ product })
+
   return { product }
 }
