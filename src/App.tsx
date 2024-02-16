@@ -74,8 +74,6 @@ export function App() {
     })
   }
 
-  console.log('Render')
-
   return (
     <div className="flex h-screen min-w-[340px]  items-center justify-center">
       <Card className="relative mx-2 w-full max-w-[700px]">
