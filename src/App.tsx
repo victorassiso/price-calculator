@@ -41,7 +41,7 @@ export function App() {
     resolver: zodResolver(FormSchema),
     defaultValues: {
       modelName: '',
-      installments: 12,
+      installments: 1,
       startingAmount: 0,
     },
   })
@@ -103,7 +103,7 @@ export function App() {
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
-                    <SelectTrigger ref={field.ref}>
+                    <SelectTrigger ref={field.ref} className="border-primary">
                       <SelectValue placeholder="Selecione um modelo" />
                     </SelectTrigger>
                     <SelectContent className="h-[250px]">
