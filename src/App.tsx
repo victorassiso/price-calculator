@@ -1,11 +1,10 @@
 import './global.css'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { modelArray, models } from './assets/models'
+import { productArray } from './assets/models'
 import { Button } from './components/ui/button'
 import {
   Card,
@@ -24,6 +23,10 @@ import {
   SelectValue,
 } from './components/ui/select'
 import { Slider } from './components/ui/slider'
+import { useInstallments } from './hooks/useInstallments'
+import { useProduct } from './hooks/useProduct'
+import { useStartingAmount } from './hooks/useStartingAmount'
+import { whatsAppRedirect } from './utils/whastAppRedirect'
 
 const FormSchema = z.object({
   modelName: z.string({ required_error: 'Selecione um modelo' }).min(2),
@@ -34,76 +37,51 @@ const FormSchema = z.object({
 type FormType = z.infer<typeof FormSchema>
 
 export function App() {
-  const [installmentsvalue, setInstallmentsValue] = useState(0)
-  const [modelPrice, setModelPrice] = useState(0)
-  const [modelImg, setModelImg] = useState('')
-  const { watch, control, setValue, handleSubmit } = useForm<FormType>({
+  const { watch, control, handleSubmit } = useForm<FormType>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       modelName: '',
-      installments: 1,
+      installments: 12,
       startingAmount: 0,
     },
   })
   const watchedModelName = watch('modelName')
-  const watchedInstallments = watch('installments')
-  const watchedStartingAmount = watch('startingAmount')
-  const watchedForm = watch()
+  const watchedInstallments = parseFloat(String(watch('installments')))
+  const watchedStartingAmount = parseFloat(String(watch('startingAmount')))
+  const { product } = useProduct(watchedModelName)
+  const {
+    startingAmount,
+    minStartingAmount,
+    maxStartingAmount,
+    startingAmountStep,
+  } = useStartingAmount({ product, startingAmount: watchedStartingAmount })
+  const { installments, maxInstallments, minInstallments, installmentsStep } =
+    useInstallments({
+      installments: watchedInstallments,
+      startingAmount,
+    })
 
-  useEffect(() => {
-    const model = models[watchedModelName]
+  const total = (product.price - startingAmount) * 2
 
-    if (model) {
-      setModelPrice(model.price)
-      setModelImg(model.img)
-    } else {
-      setModelPrice(0)
-      setModelImg('')
-    }
-  }, [watchedModelName, setValue])
+  const totalPerInstallment =
+    total === 0 || !watchedModelName ? 0 : total / installments
 
-  useEffect(() => {
-    const price = modelPrice
-    const startingAmount = parseFloat(String(watchedStartingAmount))
-    const installments = parseFloat(String(watchedInstallments))
-
-    // const interest = (price - startingAmount) * Math.pow(1.047, installments)
-
-    // const total = interest + startingAmount
-
-    const total = price - (startingAmount * 2) / installments
-
-    const totalPerInstallment =
-      total === 0 || !watchedModelName ? 0 : total / installments
-
-    setInstallmentsValue(totalPerInstallment)
-  }, [modelPrice, watchedInstallments, watchedModelName, watchedStartingAmount])
-
-  function OpenWhatsAppLink() {
-    const phoneNumber = '+5521995327044'
-    const message = `Olá, gostaria de adquirir um ${watchedModelName} dando ${watchedStartingAmount.toLocaleString(
-      'pt-BR',
-      {
-        style: 'currency',
-        currency: 'EUR',
-      },
-    )} de entrada e parcelando em ${watchedInstallments} vezes.`
-
-    const encodedMessage = encodeURIComponent(message)
-
-    const whatsappLink =
-      'https://wa.me/' + phoneNumber + '/?text=' + encodedMessage
-
-    window.open(whatsappLink, '_blank')
+  function handleWhatsAppRedirect() {
+    whatsAppRedirect({
+      productName: watchedModelName,
+      installments,
+      startingAmount,
+    })
   }
-  // console.log('Render')
+
+  console.log('Render')
 
   return (
     <div className="flex h-screen min-w-[340px]  items-center justify-center">
-      <Card className="relative w-full max-w-[700px]">
-        <form onSubmit={handleSubmit(OpenWhatsAppLink)}>
+      <Card className="relative mx-2 w-full max-w-[700px]">
+        <form onSubmit={handleSubmit(handleWhatsAppRedirect)}>
           <div className="absolute right-2 top-5 hidden xs:block">
-            <img src={modelImg} alt={modelImg} className="max-h-40" />
+            <img src={product.img} alt={product.img} className="max-h-40" />
           </div>
           <CardHeader className="flex flex-col gap-2">
             <CardTitle className="text-center xs:w-80 xs:text-start">
@@ -131,7 +109,7 @@ export function App() {
                       <SelectValue placeholder="Selecione um modelo" />
                     </SelectTrigger>
                     <SelectContent className="h-[250px]">
-                      {modelArray.map((item, i) => (
+                      {productArray.map((item, i) => (
                         <SelectItem key={i} value={item.name}>
                           <span>{item.name}</span>
                         </SelectItem>
@@ -141,7 +119,7 @@ export function App() {
                 )}
               />
               <div className="flex justify-center xs:hidden">
-                <img src={modelImg} alt={modelImg} className="max-h-40" />
+                <img src={product.img} alt={product.img} className="max-h-40" />
               </div>
             </div>
 
@@ -149,7 +127,7 @@ export function App() {
               <div className="flex items-center gap-2">
                 <Label htmlFor="entryAmount">Valor de entrada:</Label>
                 <span>
-                  {watchedForm.startingAmount.toLocaleString('pt', {
+                  {startingAmount.toLocaleString('pt', {
                     style: 'currency',
                     currency: 'EUR',
                   })}
@@ -161,19 +139,26 @@ export function App() {
                 render={({ field }) => (
                   <Slider
                     onValueChange={field.onChange}
-                    defaultValue={[field.value]}
+                    defaultValue={[product.minStartingAmount]}
                     id="startingAmount"
-                    max={600}
-                    step={100}
+                    min={minStartingAmount}
+                    max={maxStartingAmount}
+                    step={startingAmountStep}
                   />
                 )}
               />
 
               <div className="flex items-center justify-between text-sm text-muted-foreground">
-                <span>Min: € 0,00</span>
+                <span>
+                  Min:{' '}
+                  {minStartingAmount.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'EUR',
+                  })}
+                </span>
                 <span>
                   Max:{' '}
-                  {modelPrice.toLocaleString('pt-BR', {
+                  {maxStartingAmount.toLocaleString('pt-BR', {
                     style: 'currency',
                     currency: 'EUR',
                   })}
@@ -184,7 +169,7 @@ export function App() {
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2">
                 <Label htmlFor="installments">Número de parcelas:</Label>
-                <span>{watchedForm.installments}</span>
+                <span>{installments}</span>
               </div>
               <Controller
                 name="installments"
@@ -193,17 +178,17 @@ export function App() {
                   <Slider
                     onValueChange={field.onChange}
                     defaultValue={[field.value]}
-                    id="startingAmount"
-                    max={24}
-                    min={1}
-                    step={1}
+                    id="installments"
+                    max={maxInstallments}
+                    min={minInstallments}
+                    step={installmentsStep}
                   />
                 )}
               />
 
               <div className="flex items-center justify-between text-sm text-muted-foreground">
-                <span>Min: 1</span>
-                <span>Max: 24</span>
+                <span>Min: {minInstallments}</span>
+                <span>Max: {maxInstallments}</span>
               </div>
             </div>
           </CardContent>
@@ -211,10 +196,10 @@ export function App() {
             <CardTitle>
               <span className="text-muted-foreground">Total: </span>
               <span className="text-xl text-muted-foreground">
-                {watchedInstallments}x de{' '}
+                {installments}x de{' '}
               </span>
               <span className="mr-2 text-3xl">
-                {installmentsvalue.toLocaleString('pt-BR', {
+                {totalPerInstallment.toLocaleString('pt-BR', {
                   style: 'currency',
                   currency: 'EUR',
                 })}
