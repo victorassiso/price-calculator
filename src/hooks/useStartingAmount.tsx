@@ -17,7 +17,7 @@ export function useStartingAmount({
 }: useStartingAmountProps): useStartingAmountReturn {
   const minStartingAmount = product.minStartingAmount
   const maxStartingAmount = product.price * 0.8
-  const startingAmountStep = 10
+  const startingAmountStep = 50
 
   const newStartingAmount =
     startingAmount < product.minStartingAmount
