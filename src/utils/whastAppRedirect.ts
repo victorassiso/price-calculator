@@ -10,13 +10,17 @@ export function whatsAppRedirect({
   startingAmount,
 }: WhatsAppRedirectProps) {
   const phoneNumber = '+351910865962'
-  const message = `Olá, estou interessado em adquirir um *${productName}* dando *${startingAmount.toLocaleString(
+
+  const installmentType =
+    installments <= 6 ? 'mensal' : installments <= 12 ? 'quinzenal' : 'semanal'
+
+  const message = `Olá, tenho interesse na aquisição de um _${productName}_, optanto por realizar um pagamento inicial de _${startingAmount.toLocaleString(
     'pt-BR',
     {
       style: 'currency',
       currency: 'EUR',
     },
-  )}* de entrada e parcelando em *${installments}* vezes.`
+  )}_ e parcelando o restante em _${installments}_ ${installments > 1 ? 'vezes' : 'vez'}, com vencimento ${installmentType}.`
 
   const encodedMessage = encodeURIComponent(message)
 

@@ -24,7 +24,7 @@ import {
 } from './components/ui/select'
 import { Slider } from './components/ui/slider'
 import { useInstallments } from './hooks/useInstallments'
-import { useProduct } from './hooks/useProduct'
+import { initialProduct, useProduct } from './hooks/useProduct'
 import { useStartingAmount } from './hooks/useStartingAmount'
 import { whatsAppRedirect } from './utils/whastAppRedirect'
 const FormSchema = z.object({
@@ -39,7 +39,7 @@ export function App() {
   const { watch, control, handleSubmit } = useForm<FormType>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      modelName: '',
+      modelName: initialProduct.name,
       installments: 6,
       startingAmount: 0,
     },
@@ -64,6 +64,11 @@ export function App() {
 
   const totalPerInstallment =
     total === 0 || !watchedModelName ? 0 : total / installments
+
+  const roundedTotalPerInstallment =
+    Math.ceil(totalPerInstallment) - totalPerInstallment > 0.5
+      ? Math.floor(totalPerInstallment) + 0.5
+      : Math.ceil(totalPerInstallment)
 
   function handleWhatsAppRedirect() {
     whatsAppRedirect({
@@ -196,7 +201,7 @@ export function App() {
                 {installments}x de{' '}
               </span>
               <span className="mr-2 text-3xl">
-                {totalPerInstallment.toLocaleString('pt-BR', {
+                {roundedTotalPerInstallment.toLocaleString('pt-BR', {
                   style: 'currency',
                   currency: 'EUR',
                 })}

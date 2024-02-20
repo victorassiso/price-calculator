@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react'
 
-import { Product, productMap } from '@/assets/products'
+import { productMap } from '@/assets/products'
+
+export const initialProduct = productMap['iPhone 15 Pro Max - 256GB']
 
 export function useProduct(productName: string) {
-  const [product, setProduct] = useState({
-    name: '',
-    img: '',
-    minStartingAmount: 0,
-    price: 0,
-  } as Product)
+  const [product, setProduct] = useState(initialProduct)
 
   // Update Product state
   useEffect(() => {
@@ -16,12 +13,7 @@ export function useProduct(productName: string) {
     if (product) {
       setProduct(product)
     } else {
-      setProduct({
-        name: '',
-        img: '',
-        minStartingAmount: 0,
-        price: 0,
-      } as Product)
+      setProduct(initialProduct)
     }
   }, [productName])
 
