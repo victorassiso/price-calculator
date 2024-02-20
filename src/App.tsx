@@ -170,7 +170,15 @@ export function App() {
 
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2">
-                <Label htmlFor="installments">Número de parcelas:</Label>
+                <Label htmlFor="installments">
+                  Número de parcelas{' '}
+                  {installments <= 6
+                    ? 'mensais'
+                    : installments <= 12
+                      ? 'quinzenais'
+                      : 'semanais'}
+                  :
+                </Label>
                 <span>{installments}</span>
               </div>
               <Controller
