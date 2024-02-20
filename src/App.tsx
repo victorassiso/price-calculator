@@ -40,7 +40,7 @@ export function App() {
     resolver: zodResolver(FormSchema),
     defaultValues: {
       modelName: '',
-      installments: 1,
+      installments: 6,
       startingAmount: 0,
     },
   })
