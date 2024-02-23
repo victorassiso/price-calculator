@@ -82,13 +82,17 @@ export function App() {
     <div className="flex h-screen min-w-[340px]  items-center justify-center">
       <Card className="relative mx-2 w-full max-w-[700px]">
         <form onSubmit={handleSubmit(handleWhatsAppRedirect)}>
-          <div className="absolute right-2 top-5 hidden xs:block">
-            <img src={product.img} alt={product.img} className="max-h-40" />
+          <div className="absolute right-2 top-5 hidden h-48 w-52 items-center justify-center overflow-hidden xs:flex">
+            <img
+              src={product.img}
+              alt={product.img}
+              className="h-48 object-cover"
+            />
           </div>
           <CardHeader className="flex flex-col gap-2">
             <CardTitle className="text-center xs:w-80 xs:text-start">
               {/* Simule facilmente o valor das parcelas do seu próximo produto
-              Apple! */}
+                Apple! */}
               Simulador de preços
             </CardTitle>
             <CardDescription className="text-center xs:w-80 xs:text-start">
@@ -120,9 +124,13 @@ export function App() {
                   </Select>
                 )}
               />
-              <div className="flex justify-center xs:hidden">
-                <img src={product.img} alt={product.img} className="max-h-40" />
-              </div>
+            </div>
+            <div className="flex h-40 w-full items-center justify-center overflow-hidden xs:hidden">
+              <img
+                src={product.img}
+                alt={product.img}
+                className="h-40 object-cover"
+              />
             </div>
 
             <div className="flex flex-col gap-2">
