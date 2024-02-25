@@ -1,6 +1,7 @@
 import './global.css'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -77,6 +78,24 @@ export function App() {
       startingAmount,
     })
   }
+
+  useEffect(() => {
+    const preloadImages = async () => {
+      const urls = products.map((product) => product.img || '')
+      await Promise.all(
+        urls.map((url) => {
+          return new Promise((resolve, reject) => {
+            const img = new Image()
+            img.src = url
+            img.onload = resolve
+            img.onerror = reject
+          })
+        }),
+      )
+    }
+
+    preloadImages()
+  }, [])
 
   return (
     <div className="flex h-screen min-w-[340px]  items-center justify-center">

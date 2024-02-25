@@ -1,10 +1,3 @@
-// import iPhone13 from './iPhone13.png'
-// import iPhone14 from './iPhone14.png'
-// import iPhone14Plus from './iPhone14Plus.png'
-// import iPhone15 from './iPhone15.png'
-// import iPhone15Plus from './iPhone15Plus.png'
-// import iPhone15Pro from './iPhone15Pro.png'
-// import iPhone15ProMax from './iPhone15ProMax.png'
 import { z } from 'zod'
 
 import csv from './produtos_credphone.csv'
