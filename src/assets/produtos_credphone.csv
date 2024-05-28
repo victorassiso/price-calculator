@@ -1,48 +1,48 @@
 Produto,Preço,Entrada Mínima,Entrada Máxima,Imagem
-iPhone 11 - 64GB,"€245,00","€150,00","€196,00",
-iPhone 11 - 128GB,"€330,00","€150,00","€264,00",
-iPhone 11 - 256GB,"€350,00","€150,00","€280,00",
-iPhone 11 Pro - 64GB,"€350,00","€150,00","€280,00",
-iPhone 11 Pro - 256GB,"€430,00","€150,00","€344,00",
-iPhone 11 Pro - 512GB,"€490,00","€150,00","€392,00",
-iPhone 11 Pro Max - 64GB,"€440,00","€150,00","€352,00",
-iPhone 11 Pro Max - 256GB,"€520,00","€150,00","€416,00",
-iPhone 11 Pro Max - 512GB,"€560,00","€150,00","€448,00",
-iPhone 12 - 64GB,"€400,00","€150,00","€320,00",
-iPhone 12 - 128GB,"€450,00","€150,00","€360,00",
-iPhone 12 - 256GB,"€500,00","€150,00","€400,00",
-iPhone 12 Pro - 128GB,"€530,00","€150,00","€424,00",
-iPhone 12 Pro - 256GB,"€600,00","€150,00","€480,00",
-iPhone 12 Pro - 512GB,"€670,00","€150,00","€536,00",
-iPhone 12 Pro Max - 128GB,"€550,00","€150,00","€440,00",
-iPhone 12 Pro Max - 256GB,"€630,00","€150,00","€504,00",
-iPhone 12 Pro Max - 512GB,,"€150,00",,
+iPhone 11 - 64GB,"€245,00","€100,00","€196,00",iPhone11.png
+iPhone 11 - 128GB,"€330,00","€100,00","€264,00",iPhone11.png
+iPhone 11 - 256GB,"€350,00","€100,00","€280,00",iPhone11.png
+iPhone 11 Pro - 64GB,"€350,00","€100,00","€280,00",iPhone11ProEProMax.png
+iPhone 11 Pro - 256GB,"€430,00","€100,00","€344,00",iPhone11ProEProMax.png
+iPhone 11 Pro - 512GB,"€490,00","€100,00","€392,00",iPhone11ProEProMax.png
+iPhone 11 Pro Max - 64GB,"€440,00","€100,00","€352,00",iPhone11ProEProMax.png
+iPhone 11 Pro Max - 256GB,"€520,00","€100,00","€416,00",iPhone11ProEProMax.png
+iPhone 11 Pro Max - 512GB,"€560,00","€100,00","€448,00",iPhone11ProEProMax.png
+iPhone 12 - 64GB,"€400,00","€150,00","€320,00",iPhone12.png
+iPhone 12 - 128GB,"€450,00","€150,00","€360,00",iPhone12.png
+iPhone 12 - 256GB,"€500,00","€150,00","€400,00",iPhone12.png
+iPhone 12 Pro - 128GB,"€530,00","€150,00","€424,00",iPhone12ProEProMax.png
+iPhone 12 Pro - 256GB,"€600,00","€150,00","€480,00",iPhone12ProEProMax.png
+iPhone 12 Pro - 512GB,"€670,00","€150,00","€536,00",iPhone12ProEProMax.png
+iPhone 12 Pro Max - 128GB,"€550,00","€150,00","€440,00",iPhone12ProEProMax.png
+iPhone 12 Pro Max - 256GB,"€630,00","€150,00","€504,00",iPhone12ProEProMax.png
+iPhone 12 Pro Max - 512GB,,"€150,00",,iPhone12ProEProMax.png
 iPhone 13 - 128GB,"€610,00","€200,00","€488,00",iPhone13.png
 iPhone 13 - 256GB,"€660,00","€200,00","€528,00",iPhone13.png
 iPhone 13 - 512GB,,"€200,00",,iPhone13.png
-iPhone 13 Pro - 128GB,"€700,00","€200,00","€560,00",
-iPhone 13 Pro - 256GB,"€780,00","€200,00","€624,00",
-iPhone 13 Pro - 512GB,"€900,00","€200,00","€720,00",
-iPhone 13 Pro - 1TB,"€950,00","€200,00","€760,00",
-iPhone 13 Pro Max - 128GB,"€760,00","€200,00","€608,00",iPhone14ProMax.png
-iPhone 13 Pro Max - 256GB,"€810,00","€200,00","€648,00",iPhone14ProMax.png
-iPhone 13 Pro Max - 512GB,"€880,00","€200,00","€704,00",iPhone14ProMax.png
-iPhone 13 Pro Max - 1TB,"€980,00","€200,00","€784,00",iPhone14ProMax.png
+iPhone 13 Pro - 128GB,"€700,00","€200,00","€560,00",iPhone13ProEProMax.png
+iPhone 13 Pro - 256GB,"€780,00","€200,00","€624,00",iPhone13ProEProMax.png
+iPhone 13 Pro - 512GB,"€900,00","€200,00","€720,00",iPhone13ProEProMax.png
+iPhone 13 Pro - 1TB,"€950,00","€200,00","€760,00",iPhone13ProEProMax.png
+iPhone 13 Pro Max - 128GB,"€760,00","€200,00","€608,00",iPhone13ProEProMax.png
+iPhone 13 Pro Max - 256GB,"€810,00","€200,00","€648,00",iPhone13ProEProMax.png
+iPhone 13 Pro Max - 512GB,"€880,00","€200,00","€704,00",iPhone13ProEProMax.png
+iPhone 13 Pro Max - 1TB,"€980,00","€200,00","€784,00",iPhone13ProEProMax.png
 iPhone 14 - 128GB,"€690,00","€250,00","€552,00",iPhone14.png
 iPhone 14 - 256GB,"€770,00","€250,00","€616,00",iPhone14.png
 iPhone 14 - 512GB,"€860,00","€250,00","€688,00",iPhone14.png
 iPhone 14 Plus - 128GB,"€750,00","€250,00","€600,00",iPhone14Plus.png
 iPhone 14 Plus - 256GB,"€830,00","€250,00","€664,00",iPhone14Plus.png
 iPhone 14 Plus - 512GB,"€840,00","€250,00","€672,00",iPhone14Plus.png
-iPhone 14 Pro (open box) - 128GB,"€860,00","€250,00","€688,00",iPhone14ProMax.png
-iPhone 14 Pro (open box) - 256GB,"€960,00","€250,00","€768,00",iPhone14ProMax.png
-iPhone 14 Pro (open box) - 512GB,"€1.050,00","€250,00","€840,00",iPhone14ProMax.png
-iPhone 14 Pro (open box) - 1TB,"€1.300,00","€250,00","€1.040,00",iPhone14ProMax.png
-iPhone 14 Pro - 128GB,"€1.000,00","€250,00","€800,00",
-iPhone 14 Pro - 256GB,"€1.050,00","€250,00","€840,00",
-iPhone 14 Pro Max - 128GB,"€1.000,00","€250,00","€800,00",
-iPhone 14 Pro Max - 256GB,"€1.050,00","€250,00","€840,00",
-iPhone 14 Pro Max - 512GB,"€1.400,00","€250,00","€1.120,00",
+iPhone 14 Pro (open box) - 128GB,"€860,00","€250,00","€688,00",iPhone14ProEProMax.png
+iPhone 14 Pro (open box) - 256GB,"€960,00","€250,00","€768,00",iPhone14ProEProMax.png
+iPhone 14 Pro (open box) - 512GB,"€1.050,00","€250,00","€840,00",iPhone14ProEProMax.png
+iPhone 14 Pro (open box) - 1TB,"€1.300,00","€250,00","€1.040,00",iPhone14ProEProMax.png
+iPhone 14 Pro - 128GB,"€1.000,00","€250,00","€800,00",iPhone14ProEProMax.png
+iPhone 14 Pro - 256GB,"€1.050,00","€250,00","€840,00",iPhone14ProEProMax.png
+iPhone 14 Pro Max - 128GB,"€1.000,00","€250,00","€800,00",iPhone14ProEProMax.png
+iPhone 14 Pro Max - 256GB,"€1.050,00","€250,00","€840,00",iPhone14ProEProMax.png
+iPhone 14 Pro Max - 512GB,"€1.400,00","€250,00","€1.120,00",iPhone14ProEProMax.png
 iPhone 15 - 128GB,"€880,00","€300,00","€704,00",iPhone15.png
 iPhone 15 - 256GB,"€910,00","€300,00","€728,00",iPhone15.png
 iPhone 15 - 512GB,"€1.050,00","€300,00","€840,00",iPhone15.png
@@ -80,17 +80,17 @@ iPad Pro 10.9 - 1TB,,"€300,00",,
 iPad Pro 10.9 - 2TB,,"€300,00",,
 Apple Watch SE - 40mm,"€289,00","€150,00","€231,20",
 Apple Watch SE - 44mm,"€319,00","€150,00","€255,20",
-SE GPS + Cellular - 40mm,,,,
-SE GPS + Cellular - 44mm,,,,
-Apple Watch S9 - 41mm,"€459,00","€150,00","€367,20",
-Apple Watch S9 - 45mm,"€489,00","€150,00","€391,20",
-S9 + GPS Celular - 41mm,"€579,00",,"€463,20",
-S9 + GPS Celular - 45mm,"€609,00",,"€487,20",
-Watch Ultra 2 - 49mm,"€909,00",,"€727,20",
-AirPods - 3gr,"€209,00",,"€167,20",AirPods.png
-AirPods - Pro 1gr,,,,AirPods.png
-AirPods - Pro 2gr,"€280,00",,"€224,00",AirPods.png
-AirPods Max,"€579,00",,"€463,20",AirPods.png
+SE GPS + Cellular - 40mm,,"€100,00",,
+SE GPS + Cellular - 44mm,,"€100,00",,
+Apple Watch S9 - 41mm,"€459,00","€150,00","€367,20",AppleWatchS9.png
+Apple Watch S9 - 45mm,"€489,00","€150,00","€391,20",AppleWatchS9.png
+S9 + GPS Celular - 41mm,"€579,00","€100,00","€463,20",
+S9 + GPS Celular - 45mm,"€609,00","€100,00","€487,20",
+Watch Ultra 2 - 49mm,"€909,00","€250,00","€727,20",
+AirPods - 3gr,"€209,00","€100,00","€167,20",AirPods.png
+AirPods - Pro 1gr,,"€100,00",,AirPods.png
+AirPods - Pro 2gr,"€280,00","€100,00","€224,00",AirPods.png
+AirPods Max,"€579,00","€150,00","€463,20",AirPods.png
 Nitendo Switch,"€249,00",,"€199,20",
 Nitendo Switch - OLED,"€349,00",,"€279,20",
 JBL Boombox 3,"€420,00",,"€336,00",
